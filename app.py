@@ -1,3 +1,4 @@
+
 """
 Intelligent Compressor Health Monitoring System
 Professional Edition - AWS SageMaker Trained ML Model
@@ -137,8 +138,14 @@ bearing_seizure_flag = 1 if (vibration > 3.0 and temperature > 72) else 0
 valve_failure_flag = 1 if (discharge_pressure < 6.5 and suction_pressure > 2.0) or (discharge_pressure - suction_pressure > 14) else 0
 intake_blockage_flag = 1 if (suction_pressure < 0.7 and discharge_pressure < 6.8) else 0
 
-# 2. Reshape raw dashboard UI selections into a structured 2D array matching SageMaker feature columns:
-live_telemetry_stream = np.array([[vibration, temperature, discharge_pressure, suction_pressure, operating_hours]])
+# 2. UPDATED MATRIX ALIGNMENT: Organized array to precisely match AWS SageMaker training column signatures
+live_telemetry_stream = np.array([[
+    operating_hours,     # 1. operating_hours_hrs_year
+    suction_pressure,    # 2. average_suction_pressure_bar
+    discharge_pressure,  # 3. average_discharge_pressure_bar
+    vibration,           # 4. average_vibration_level_mm_s
+    temperature          # 5. lubricant_temperature_c
+]])
 
 if model is not None:
     try:
