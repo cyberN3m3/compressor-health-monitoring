@@ -249,7 +249,7 @@ col1, col2, col3 = st.columns(3, gap="medium")
 with col1:
     if thermal_carryover_flag:
         thermal_status, thermal_class = "CRITICAL DETECTION", "color: #e74c3c; font-weight: bold;"
-    elif sep_temp > 100 or tg_high_warn := (teg_temp > 102):
+    elif sep_temp > 100 or teg_temp > 102:
         thermal_status, thermal_class = "ELEVATED TEMPERATURE", "color: #f39c12; font-weight: bold;"
     else:
         thermal_status, thermal_class = "STABLE OPERATIONAL BOUNDS", "color: #27ae60;"
