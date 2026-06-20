@@ -1,0 +1,17 @@
+year,compressor_id,failure_type,downtime_duration_(hrs),maintenance_cost_(usd),mtbf_(hrs),mttr_(hrs),root_cause_identified,primary_failure_component,failure_severity_(1-10),warning_signs_detected_(hrs),failure_mode,secondary_failures_count,parts_cost_(usd),labor_cost_(usd),lost_production_value_(usd),total_failure_cost_(usd),equipment_replaced,preventive_action_taken,reliability_improved_(%)
+2022,COMP_002,Bearing Seizure,24,13312,5328,26,Yes,Bearing,9,94,Sudden,2,2800,2040,8472,13312,Yes,Yes,64
+2022,COMP_003,Valve Failure,36,19860,4838,42,Yes,Valve,8,85,Sudden,1,1500,3060,15300,19860,No,Yes,59
+2022,COMP_003,Seal Leakage,8,3530,6866,11,No,Seal,5,32,Progressive,0,650,680,2200,3530,No,Yes,44
+2022,COMP_001,Motor Failure,48,25712,5224,53,Yes,Motor,9,96,Sudden,2,3200,4080,18432,25712,Yes,Yes,62
+2023,COMP_001,Oil Leakage,12,5188,7175,19,No,Seal,4,23,Gradual,0,400,1020,3768,5188,No,Yes,31
+2023,COMP_002,Pressure Drop,4,2158,6891,7,Yes,Filter,3,26,Gradual,0,250,340,1568,2158,No,Yes,28
+2023,COMP_003,Bearing Damage,40,17900,5464,43,Yes,Bearing,8,65,Sudden,1,2500,3400,12000,17900,No,Yes,62
+2023,COMP_004,Valve Failure,30,13360,5541,32,Yes,Valve,7,77,Progressive,0,1600,2550,9210,13360,No,Yes,52
+2023,COMP_001,Overheating,16,6384,5653,20,Yes,Cooler,6,64,Progressive,0,800,1360,4224,6384,No,Yes,41
+2023,COMP_002,Vibration Issue,8,3236,6052,13,Yes,Mounting,5,24,Progressive,0,500,680,2056,3236,No,Yes,41
+2024,COMP_003,Seal Leakage,20,11200,6773,26,Yes,Seal,5,49,Progressive,0,600,1700,8900,11200,No,Yes,37
+2024,COMP_001,Oil Analysis Alert,6,2684,7335,11,Yes,Oil,4,61,Gradual,0,350,510,1824,2684,No,Yes,38
+2024,COMP_002,Filter Clogging,3,1756,7458,5,Yes,Filter,3,22,Gradual,0,280,255,1221,1756,No,Yes,32
+2024,COMP_004,Bearing Noise,24,14408,5545,30,Yes,Bearing,7,61,Progressive,0,2000,2040,10368,14408,No,Yes,51
+2024,COMP_003,Motor Speed Variation,12,5952,6390,14,Yes,Motor,6,39,Progressive,0,1200,1020,3732,5952,No,Yes,45
+2024,COMP_001,Pressure Valve Sticking,14,7232,6057,17,Yes,Valve,5,53,Progressive,0,750,1190,5292,7232,No,Yes,40

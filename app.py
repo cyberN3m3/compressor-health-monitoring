@@ -1,6 +1,6 @@
 """
 Intelligent Compressor Health Monitoring System
-Professional Edition - AWS SageMaker Trained ML Model
+Advanced 14-Parameter Enterprise Edition - AWS SageMaker Trained ML Model
 """
 
 import os
@@ -38,7 +38,7 @@ except FileNotFoundError:
 
 @st.cache_resource
 def load_production_model():
-    """Load the newly trained SageMaker Random Forest model binary"""
+    """Load the advanced 14-parameter Random Forest binary"""
     model_path = 'models/compressor_risk_model.pkl'
     
     if os.path.exists(model_path):
@@ -72,8 +72,8 @@ def get_recommendation(risk_percentage):
             "timeline": "Within 24 hours",
             "steps": [
                 "Isolate unit and reduce operational load to safety limits.",
-                "Deploy emergency maintenance dispatch immediately.",
-                "Cross-reference intake lines, valves, and bearing temperature arrays."
+                "Deploy emergency maintenance engineering dispatch immediately.",
+                "Check lubrication line pressure flags and high-temperature thermal grids."
             ],
             "color": "#e74c3c"
         }
@@ -83,8 +83,8 @@ def get_recommendation(risk_percentage):
             "timeline": "This week",
             "steps": [
                 "Log anomaly event and schedule a field maintenance inspection within 7 days.",
-                "Increase sensor telemetry evaluation to daily tracking cycles.",
-                "Pre-stage replacement seals and intake filters."
+                "Increase telemetry sensor tracking to continuous daily monitoring loops.",
+                "Pre-stage replacement valve kits and air intake filtration units."
             ],
             "color": "#f39c12"
         }
@@ -108,7 +108,7 @@ col1, col2 = st.columns([3, 1])
 
 with col1:
     st.title("Compressor Health Monitoring System")
-    st.markdown("**Real-time Risk Assessment & Predictive Maintenance Intelligence**")
+    st.markdown("**Real-time Risk Assessment & Predictive Maintenance Intelligence (14-Parameter Enterprise Edition)**")
 
 with col2:
     st.info(f"**Updated**\n{datetime.now().strftime('%Y-%m-%d %H:%M')}")
@@ -116,29 +116,46 @@ with col2:
 st.divider()
 
 # ============================================================
-# SIDEBAR - INPUT PARAMETERS (LIVE TELEMETRY STREAM)
+# SIDEBAR - INPUT PARAMETERS (14-PARAMETER LIVE STREAM)
 # ============================================================
 
-st.sidebar.markdown("### Input Parameters")
+st.sidebar.markdown("### 🎛️ Core Baselines")
 st.sidebar.divider()
 
-vibration = st.sidebar.slider("Vibration Level (mm/s)", 0.0, 5.0, 2.1, 0.1)
-temperature = st.sidebar.slider("Lubricant Temperature (°C)", 50, 100, 65, 1)
-discharge_pressure = st.sidebar.slider("Discharge Pressure (bar)", 6.0, 10.0, 7.5, 0.1)
-suction_pressure = st.sidebar.slider("Suction Pressure (bar)", 0.5, 3.0, 1.2, 0.1)
-operating_hours = st.sidebar.slider("Operating Hours/Year", 1000, 10000, 8760, 100)
+operating_hours = st.sidebar.slider("Operating Hours/Year", 1000, 10000, 8000)
+suction_pressure = st.sidebar.slider("Suction Pressure (bar)", 0.5, 3.0, 1.1, 0.1)
+discharge_pressure = st.sidebar.slider("Discharge Pressure (bar)", 5.0, 15.0, 9.9, 0.1)
+vibration = st.sidebar.slider("Vibration Level (mm/s)", 0.0, 6.0, 4.7, 0.1)
+temperature = st.sidebar.slider("Lubricant Temp (°C)", 40, 110, 76, 1)
+
+st.sidebar.markdown("### 📊 Thermodynamic Performance")
+st.sidebar.divider()
+
+compression_ratio = st.sidebar.slider("Compression Ratio", 2.0, 15.0, 9.2, 0.1)
+discharge_temp = st.sidebar.slider("Discharge Temp (°C)", 50, 130, 101, 1)
+bearing_temp = st.sidebar.slider("Bearing Temp (°C)", 40, 120, 82, 1)
+oil_pressure = st.sidebar.slider("Oil Pressure (bar)", 5.0, 20.0, 12.5, 0.1)
+power_consumption = st.sidebar.slider("Power Consumption (kW)", 10.0, 100.0, 44.8, 0.5)
+efficiency = st.sidebar.slider("Actual Efficiency (%)", 20.0, 100.0, 55.1, 0.5)
+pressure_drop = st.sidebar.slider("Pressure Drop (bar)", 0.0, 3.0, 1.1, 0.1)
+filter_diff = st.sidebar.slider("Filter Differential (bar)", 0.0, 4.0, 1.7, 0.1)
+valve_score = st.sidebar.slider("Valve Condition Score (1-10)", 1, 10, 3, 1)
 
 # ============================================================
 # LIVE MACHINE LEARNING INFERENCE PIPELINE
 # ============================================================
 
 # 1. Component-specific deterministic tracking blocks for instantaneous warning indicators
-bearing_seizure_flag = 1 if (vibration > 3.0 and temperature > 72) else 0
-valve_failure_flag = 1 if (discharge_pressure < 6.5 and suction_pressure > 2.0) or (discharge_pressure - suction_pressure > 14) else 0
-intake_blockage_flag = 1 if (suction_pressure < 0.7 and discharge_pressure < 6.8) else 0
+bearing_seizure_flag = 1 if (vibration > 4.5 or bearing_temp > 88) else 0
+valve_failure_flag = 1 if (valve_score < 3 or compression_ratio > 11.0) else 0
+intake_blockage_flag = 1 if (filter_diff > 2.2 or suction_pressure < 0.9) else 0
 
-# 2. Reshape raw dashboard UI selections into a structured 2D array matching SageMaker feature columns:
-live_telemetry_stream = np.array([[vibration, temperature, discharge_pressure, suction_pressure, operating_hours]])
+# 2. Reshape raw dashboard UI selections into a structured 14-column array matching SageMaker feature format exactly:
+live_telemetry_stream = np.array([[
+    operating_hours, suction_pressure, discharge_pressure, vibration, temperature,
+    compression_ratio, discharge_temp, bearing_temp, oil_pressure, power_consumption,
+    efficiency, pressure_drop, filter_diff, valve_score
+]])
 
 if model is not None:
     try:
@@ -146,11 +163,11 @@ if model is not None:
         ml_failure_probability = model.predict_proba(live_telemetry_stream)[0][1]
         risk_percentage = float(ml_failure_probability * 100)
     except Exception:
-        # Safeguard fallback value if cloud model encounters an active file locked refresh event
-        risk_percentage = 12.5
+        # Safeguard fallback value if cloud model encounters an issue
+        risk_percentage = 24.5
 else:
     # Safe system demonstration approximation if running without model deployment link
-    risk_percentage = 15.0
+    risk_percentage = 22.5
 
 # 3. Dynamic overrides to protect equipment if strict structural hardware limits are breached
 if bearing_seizure_flag or valve_failure_flag or intake_blockage_flag:
@@ -236,41 +253,38 @@ st.subheader("Predictive Breakdown by Component Failure Pattern")
 col1, col2, col3 = st.columns(3, gap="medium")
 
 with col1:
-    # Flags if bearing anomalies or mechanical indicators cross limits
     if bearing_seizure_flag:
         bearing_status, bearing_val = "CRITICAL PATH", 100
-    elif vibration > 2.6 or temperature > 71:
+    elif vibration > 3.5 or bearing_temp > 80:
         bearing_status, bearing_val = "ELEVATED", 65
     else:
         bearing_status, bearing_val = "NORMAL", 0
     st.metric("Bearing Seizure Signature", f"{bearing_status} ({bearing_val}%)")
-    st.caption("Monitors structural vibration balances & internal heat grids.")
+    st.caption("Monitors structural vibration balances & internal bearing heat grids.")
 
 with col2:
-    # Flags if discharge decreases or suction increases abnormally (Valve leakage signature)
     if valve_failure_flag:
         valve_status, valve_val = "CRITICAL PATH", 100
-    elif risk_level == "CRITICAL" and (discharge_pressure < 6.5 or suction_pressure > 1.8):
+    elif risk_level == "CRITICAL" and (valve_score < 5 or compression_ratio > 10.0):
         valve_status, valve_val = "CRITICAL PATH", 100
-    elif discharge_pressure < 7.0 or suction_pressure > 1.5:
+    elif valve_score < 6 or compression_ratio > 8.5:
         valve_status, valve_val = "ELEVATED", 55
     else:
         valve_status, valve_val = "NORMAL", 0
     st.metric("Piston Valve Leakage Signature", f"{valve_status} ({valve_val}%)")
-    st.caption("Monitors compression drops and backward leakage pathways.")
+    st.caption("Monitors mechanical valve degradation scores and internal ratio differentials.")
 
 with col3:
-    # Flags if suction goes very low during a system warning state (Intake blockage signature)
     if intake_blockage_flag:
         intake_status, intake_val = "CRITICAL PATH", 100
-    elif risk_level == "CRITICAL" and suction_pressure < 1.4:
+    elif risk_level == "CRITICAL" and filter_diff > 1.8:
         intake_status, intake_val = "CRITICAL PATH", 100
-    elif suction_pressure < 1.0:
+    elif filter_diff > 1.5 or suction_pressure < 1.0:
         intake_status, intake_val = "ELEVATED", 45
     else:
         intake_status, intake_val = "NORMAL", 0
     st.metric("Intake Filtration Blockage Signature", f"{intake_status} ({intake_val}%)")
-    st.caption("Monitors air flow restrictions and clogged sensor inputs.")
+    st.caption("Monitors pipeline air-flow restrictions and clogged filter pressure drops.")
 
 st.divider()
 
@@ -287,15 +301,23 @@ with col1:
     
     analysis_data = {
         'Industrial Parameter': [
-            'Vibration Level (mm/s)', 'Lubricant Temperature (°C)', 
-            'Discharge Pressure (bar)', 'Suction Pressure (bar)', 'Operating Hours'
+            'Operating Hours', 'Suction Pressure (bar)', 'Discharge Pressure (bar)', 
+            'Vibration Level (mm/s)', 'Lubricant Temp (°C)', 'Compression Ratio', 
+            'Discharge Temp (°C)', 'Bearing Temp (°C)', 'Oil Pressure (bar)', 
+            'Power Consumption (kW)', 'Actual Efficiency (%)', 'Pressure Drop (bar)', 
+            'Filter Differential (bar)', 'Valve Condition Score (1-10)'
         ],
         'Live Value': [
-            f'{vibration:.2f}', f'{temperature:.1f}', 
-            f'{discharge_pressure:.2f}', f'{suction_pressure:.2f}', f'{operating_hours}'
+            f'{operating_hours}', f'{suction_pressure:.2f}', f'{discharge_pressure:.2f}', 
+            f'{vibration:.2f}', f'{temperature:.1f}', f'{compression_ratio:.2f}', 
+            f'{discharge_temp:.1f}', f'{bearing_temp:.1f}', f'{oil_pressure:.2f}', 
+            f'{power_consumption:.1f}', f'{efficiency:.1f}', f'{pressure_drop:.2f}', 
+            f'{filter_diff:.2f}', f'{valve_score}'
         ],
-        'Healthy Operating Baseline': [
-            '2.0 - 3.0', '60 - 75', '7.5 - 9.0', '1.0 - 1.8', '7000 - 8760'
+        'Healthy Operating Baseline (Dataset Means)': [
+            '7200 - 8500', '1.0 - 1.2', '8.5 - 11.0', '2.5 - 3.5', '70 - 78', 
+            '8.0 - 10.5', '95 - 105', '78 - 85', '11.5 - 13.5', 
+            '42.0 - 46.0', '52.0 - 65.0', '0.8 - 1.2', '1.4 - 1.8', '4 - 8'
         ]
     }
     
@@ -324,11 +346,11 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("Inference Engine", "Random Forest Classifier")
 with col2:
-    st.metric("Model Tree Complexity", "100 Estimators")
+    st.metric("Model Complexity", "150 Decision Trees")
 with col3:
-    st.metric("Training Dataset Records", "48 Baseline Rows")
+    st.metric("Training Dataset Source", "compressor_advanced_master.csv")
 
-st.info("System Engine connected to an updated industrial data pipeline trained on Amazon SageMaker environments.")
+st.info("System Engine connected to an updated high-dimensional industrial data pipeline trained on Amazon SageMaker environments.")
 
 # ============================================================
 # FOOTER
